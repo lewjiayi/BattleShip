@@ -1,10 +1,12 @@
 
 public class Player {
+	private String name;
 	private int life_count;
 	private int step_count;
 	private int ship_destroy_count;
 	
 	Rule rule = new Rule();
+	
 	
 	public Player() {
 		life_count = rule.getLifeNum();
@@ -42,6 +44,14 @@ public class Player {
 	
 	public int getShipDestroyCount() {
 		return ship_destroy_count;
+	}
+	
+	public void setName(String a) {
+		name = a;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	

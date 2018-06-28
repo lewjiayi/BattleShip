@@ -1,7 +1,8 @@
-import java.util.*;
+import java.util.Arrays;
 
 public class Map {
-	private String [][] map = new String [20][60];
+	Rule rule = new Rule();
+	private String [][] map = new String [rule.getMapRow()][rule.getMapCol()];
 	
 	public Map() {
 		for (String[]row : map) {
