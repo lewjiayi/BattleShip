@@ -3,10 +3,11 @@ public class Rule {
 	private int ship_num;
 	private int trap_num;
 	private int pot_num;
-	private static final int[] beginner = {80, 10, 18};
-	private static final int[] intermediate= {50, 20, 18};
-	private static final int[] advance = {20, 30, 18};
-	private static final int[] shipLength = {3, 4, 5};
+	private final int life_num = 15;
+	private final int[] beginner = {80, 10, 18};
+	private final int[] intermediate= {50, 20, 18};
+	private final int[] advance = {20, 30, 18};
+	private final int[] shipLength = {3, 4, 5};
 
 	
 	public Rule(){
@@ -50,5 +51,8 @@ public class Rule {
 		return shipLength;
 	}
 	
+	public int getLifeNum() {
+		return life_num;
+	}
 }
 
