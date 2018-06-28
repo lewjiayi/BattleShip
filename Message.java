@@ -10,47 +10,67 @@ public class Message {
 	private String msgShotLSPot = ("Life Potion! You gain 1 life!");
 	private String msgShotTRPot = ("A trap just revealed! Avoid it");
 	private String msgShotSRPot = ("Look! A ship just revealed. Destroy it!");
-	
-	public String msgWelcome() {
+	private String msgLevelSelection = ("Please select a level:\n");
+	private String msgLevel1 = ("Level 1 >> 80 ships   10 traps   18 potions\n");
+	private String msgLevel2 = ("Level 2 >> 50 ships   20 traps   18 potions\n");
+	private String msgLevel3 = ("Level 3 >> 20 ships   30 traps   18 potions\n");
+
+			
+	public String getMsgWelcome() {
 		return msgWelcome;
 	}
 	
-	public String msgGameover() {
+	public String getMsgGameover() {
 		return msgGameover;
 	}
 	
-	public String msgShotOut() {
+	public String getMsgShotOut() {
 		return msgShotOut;
 	}
 	
-	public String msgShotMiss() {
+	public String getMsgShotMiss() {
 		return msgShotMiss;
 	}
 	
-	public String msgShotShip() {
+	public String getMsgShotShip() {
 		return msgShotShip;
 	}
 	
-	public String msgShotLDTrap() {
+	public String getMsgShotLDTrap() {
 		return msgShotLDTrap;
 	}
 	
-	public String msgShotHDTrap() {
+	public String getMsgShotHDTrap() {
 		return msgShotHDTrap;
 	}
 	
-	public String msgShotLSPot() {
+	public String getMsgShotLSPot() {
 		return msgShotLSPot;
 	}
 	
-	public String msgShotTRPot() {
+	public String getMsgShotTRPot() {
 		return msgShotTRPot;
 	}
 	
-	public String msgShotSRPot() {
+	public String getMsgShotSRPot() {
 		return msgShotSRPot;
 	}
 	
+	public String getMsgLevelSelection() {
+		return msgLevelSelection;
+	}
+	
+	public String getMsgLevel1() {
+		return msgLevel1;
+	}
+	
+	public String getMsgLevel2() {
+		return msgLevel2;
+	}
+	
+	public String getMsgLevel3() {
+		return msgLevel3;
+	}
 	
 	
 }
