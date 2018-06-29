@@ -10,12 +10,15 @@ public class Game {
 		Input input = new Input();
 		Map map = new Map();
 		
-		screen.displayMessage(message.getMsgWelcome());
+		/*screen.displayMessage(message.getMsgWelcome());
 		screen.displayMessage(message.getMsgLevelSelection());
 		screen.displayMessage(message.getMsgLevel1());
 		screen.displayMessage(message.getMsgLevel2());
 		screen.displayMessage(message.getMsgLevel3());
-		level = input.inputLevel();
+		level = input.inputLevel();*/
+		
+		map.setMapDestroyShip(1, 2);
+		map.printMap();
 		
 		
 	}

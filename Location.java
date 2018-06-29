@@ -1,10 +1,11 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public class Location extends Rule {
-	private int [][] location = new int[getMapRow()][getMapCol()];
+public class Location{
+	Rule rule = new Rule();
+	private int [][] location = new int[rule.getMapRow()][rule.getMapCol()];
 	private Boolean itemPlaced;
-	private int [][] shipLocation = new int[getShipNum()][2];
+	private int [][] shipLocation = new int[rule.getShipNum()][2];
 	
 	public Location() {
 		for (int[] row : location) {
@@ -13,16 +14,25 @@ public class Location extends Rule {
 	}
 	
 	public void setShipLocation() {
-		itemPlaced = false;
+		int row, col, test;
 		Random random = new Random();
-		for(int ship=0 ; ship<getShipNum()  ; ship++){
-			if(!itemPlaced) {
-				shipLocation[ship][0]=random.nextInt(5);
-				shipLocation[ship][1]=random.nextInt(5);
+		
+		for(int ship=0 ; ship<rule.getShipNum()  ; ship++){
+			row = random.nextInt(20);
+			col = random.nextInt(60);
+			test = 0;
+			while(test <= ship){
+				if(shipLocation[test][0]==row && shipLocation[test][1]==col) {
+					row = random.nextInt(20);
+					col = random.nextInt(60);
+					test = 0;
+				}
+				test++;
 			}
+			shipLocation[ship][0]=row;
+			shipLocation[ship][1]=col;
 		}
 	}
-	
 	
 	
 }

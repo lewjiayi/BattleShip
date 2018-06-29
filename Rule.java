@@ -9,7 +9,7 @@ public class Rule {
 	private static final int[] beginner = {80, 10, 18};
 	private static final int[] intermediate= {50, 20, 18};
 	private static final int[] advance = {20, 30, 18};
-	private static final int[] shipLength = {3, 4, 5};
+	private static final int[][] shipLength = {{3},{5}};
 
 
 	
@@ -50,7 +50,7 @@ public class Rule {
 		return pot_num;
 	}
 	
-	public int[] getShipLength() {
+	public int[][] getShipLength() {
 		return shipLength;
 	}
 	
