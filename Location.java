@@ -1,6 +1,15 @@
 import java.util.Arrays;
 import java.util.Random;
 
+/* Directory
+ * Ship 	- 1
+ * HD Trap 	- 2
+ * LD Trap 	- 3
+ * LS Potion- 4
+ * TR Potion- 5
+ * SR Potion- 6
+ */
+
 public class Location{
 	Rule rule = new Rule();
 	private int [][] location = new int[rule.getMapRow()][rule.getMapCol()];
@@ -13,26 +22,31 @@ public class Location{
 		}
 	}
 	
-	public void setShipLocation() {
-		int row, col, test;
-		Random random = new Random();
-		
-		for(int ship=0 ; ship<rule.getShipNum()  ; ship++){
-			row = random.nextInt(20);
-			col = random.nextInt(60);
-			test = 0;
-			while(test <= ship){
-				if(shipLocation[test][0]==row && shipLocation[test][1]==col) {
-					row = random.nextInt(20);
-					col = random.nextInt(60);
-					test = 0;
-				}
-				test++;
-			}
-			shipLocation[ship][0]=row;
-			shipLocation[ship][1]=col;
-		}
+	public int checkLocation(int row, int col) {
+		return location[row][col];
 	}
 	
+	public void setShipLocation(int row, int col) {
+		location[row][col]=1;
+	}
 	
+	public void setTrapHDLocation(int row, int col) {
+		location[row][col]=2;
+	}
+	
+	public void setTrapLDLocation(int row, int col) {
+		location[row][col]=3;
+	}
+	
+	public void setLSPotLocation(int row, int col) {
+		location[row][col]=4;
+	}
+	
+	public void setTRPotLocation(int row, int col) {
+		location[row][col]=5;
+	}
+	
+	public void setSRPotLocation(int row, int col) {
+		location[row][col]=6;
+	}
 }

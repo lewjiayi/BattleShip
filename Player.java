@@ -4,7 +4,8 @@ public class Player {
 	private int life_count;
 	private int step_count;
 	private int ship_destroy_count;
-	
+	private Boolean statusWin;
+	private Boolean statusLose;
 	Rule rule = new Rule();
 	
 	
@@ -12,6 +13,8 @@ public class Player {
 		life_count = rule.getLifeNum();
 		step_count = 0;
 		ship_destroy_count = 0;
+		statusWin = false;
+		statusLose = false;
 	}
 	
 	public void addOneStep() {
@@ -54,6 +57,21 @@ public class Player {
 		return name;
 	}
 	
+	public Boolean getStatusWin() {
+		return statusWin;
+	}
+	
+	public Boolean getStatusLose() {
+		return statusLose;
+	}
+	
+	public void setStatusWin() {
+		statusWin = true;
+	}
+	
+	public void setStatusLose() {
+		statusLose = true;
+	}
 	
 	
 	
