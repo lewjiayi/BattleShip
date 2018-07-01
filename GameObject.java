@@ -1,30 +1,11 @@
-import java.util.*;
+import java.util.Random;
 
-public class GameObject {
+public abstract class GameObject {
 	
 	Location location = new Location();
+	Rule rule = new Rule();
+	Random random = new Random();	
 	
-	ArrayList<Ship> ship = new ArrayList<Ship>();
-	ArrayList<Trap> trap = new ArrayList<Trap>();
-	ArrayList<Potion> potion = new ArrayList<Potion>();
-	
-	Ship revealShip, destroyedShip, hiddenShip;
-	Trap revealHDTrap, revealLDTrap, triggerTrap, hiddenTrap;
-	Potion revealPotion, triggerPotion, hiddenPotion;
-	
-	revealShip = new Ship();
-	destroyedShip = new Ship();
-	hiddenShip = new Ship();
-	
-	revealHDTrap = new Trap();
-	revealLDTrap = new Trap();
-	triggerTrap = new Trap();
-	hiddenTrap = new Trap();
-	
-	revealPotion = new Potion();
-	triggerPotion = new Potion();
-	hiddenPotion = new Potion();
-	
-	ship.add(revealShip);
+	abstract public void setLocation();
 	
 }

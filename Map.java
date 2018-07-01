@@ -1,5 +1,18 @@
 import java.util.Arrays;
 
+/* Directory
+ * empty			- 0 " "
+ * Ship 			- 1 "X"
+ * Reveal ship		- 2 "O" (Not Destroyed)
+ * Triggered Trap	- 3 "*"
+ * Reveal HD Trap	- 4 "-" (Not Triggered)
+ * RevealLD Trap	- 5 "=" (Not Triggered)
+ * Triggered Potion	- 6 "@"
+ * 
+ * 
+ * 
+ */
+
 public class Map {
 	Rule rule = new Rule();
 	private String [][] map = new String [rule.getMapRow()][rule.getMapCol()];

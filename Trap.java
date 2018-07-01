@@ -2,42 +2,49 @@ import java.util.Random;
 
 public class Trap {
 	Rule rule = new Rule();
+	Random random = new Random();
+	Location location = new Location();
 	private int trapCount;
 	private int trapHDCount;
 	private int trapLDCount;
 	private int trapTriggerCount;
-	private int [][] trapLocation = new int[rule.getTrapNum()][2];
-	private int [][] trapHighLocation = new int[rule.getTrapNum()][2];
-	private int [][] trapLowLocation = new int[rule.getTrapNum()][2];
-	private int [][] trapTriggerredLocation = new int[rule.getTrapNum()][2];
-	Random random = new Random();
-	Location location = new Location();
+	private int mapRow;
+	private int mapCol;
+	private int [][] trapLocation;
+	private int [][] trapHighLocation;
+	private int [][] trapLowLocation;
+	private int [][] trapTriggerredLocation;
+	
 
-	public Trap() {
+	public Trap(int trapNum) {
 		trapTriggerCount = 0;
-		trapCount = rule.getTrapNum();
+		trapCount = trapNum;
 		trapHDCount = random.nextInt(trapCount);
 		trapLDCount = trapCount-trapHDCount;
-		
-	}
-	
-	public void setTrapLocation() {
+		mapRow = rule.getMapRow();
+		mapCol = rule.getMapCol();
+		trapLocation = new int[trapNum][2];
+		trapHighLocation = new int[trapNum][2];
+		trapLowLocation = new int[trapNum][2];
+		trapTriggerredLocation = new int[trapNum][2];
 		int row = 0, col = 0;
 		Boolean objPlaced;
 		for(int placed=0 ; placed<trapCount  ; placed++){
 			objPlaced = true;
 			while(objPlaced) {
-				row = random.nextInt(20);
-				col = random.nextInt(60);
-				if(location.checkLocation(row,col)!=0) {objPlaced = true;}
-				else {objPlaced = false;}
-				if (row>20 && col>60) {objPlaced= true;}
+				row = random.nextInt(mapRow-1);
+				col = random.nextInt(mapCol-1);
+				if (row>mapRow || col>mapCol) {objPlaced = true;}
+				else {
+					if(location.checkLocation(row,col)!=0) {objPlaced= true;}
+					else {objPlaced = false;}
+				}
 			}
 			trapLocation[placed][0]=row;
 			trapLocation[placed][1]=col;
 		}
 	}
-	
+
 	public void setTrapMix() {
 		int hightrap, lowtrap = 0, row=0, col=0;
 		Boolean highTrapBol;

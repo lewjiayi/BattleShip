@@ -7,19 +7,10 @@ public class Input {
 		input= new Scanner(System.in);
 	}
 	
-	public int inputLevel() {
+	public int inputInt() {
 		return input.nextInt();
 	}
 	
-	public int[] inputShoot() {
-		System.out.print("Where do you wish to shoot?\n");
-		System.out.print("Row:");
-		int a = input.nextInt();
-		System.out.print("Column:");
-		int b = input.nextInt();
-		int[] coordinate = {a,b};
-		return coordinate;
-	}
 	
 	public String inputName() {
 		System.out.print("What is your name?\n");

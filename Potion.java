@@ -9,34 +9,40 @@ public class Potion {
 	private int potionTRCount;
 	private int potionSRCount;
 	private int potionTriggerCount;
-	private int[][] potionLocation = new int[rule.getPotNum()][2];
-	private int[][] potionLSLocation = new int[rule.getPotNum()][2];
-	private int[][] potionTRLocation = new int[rule.getPotNum()][2];
-	private int[][] potionSRLocation = new int[rule.getPotNum()][2];
-	private int[][] potionTriggerLocation = new int[rule.getPotNum()][2];
+	private int mapRow;
+	private int mapCol;
+	private int[][] potionLocation;
+	private int[][] potionLSLocation;
+	private int[][] potionTRLocation;
+	private int[][] potionSRLocation;
+	private int[][] potionTriggerLocation;
 
 	
-	public Potion() {
-		potionCount = rule.getPotNum();
+	public Potion(int potionNum) {
+		potionCount = potionNum;
 		potionTriggerCount = 0;
+		mapRow = rule.getMapRow();
+		mapCol = rule.getMapCol();
 		potionTRCount = random.nextInt(potionCount)+1;
 		potionLSCount = random.nextInt(potionCount-potionTRCount)+1;
 		potionSRCount = potionCount - potionLSCount - potionTRCount;
-	}
-			
-
-	
-	public void setPotLocation() {
+		potionLocation = new int[potionNum][2];
+		potionLSLocation = new int[potionNum][2];
+		potionTRLocation = new int[potionNum][2];
+		potionSRLocation = new int[potionNum][2];
+		potionTriggerLocation = new int[potionNum][2];
 		int row = 0, col = 0;
 		Boolean objPlaced;
 		for(int placed=0 ; placed<potionCount  ; placed++){
 			objPlaced = true;
 			while(objPlaced) {
-				row = random.nextInt(20);
-				col = random.nextInt(60);
-				if(location.checkLocation(row,col)!=0) {objPlaced = true;}
-				else {objPlaced = false;}
-				if (row>20 && col>60) {objPlaced= true;}
+				row = random.nextInt(mapRow-1);
+				col = random.nextInt(mapCol-1);
+				if (row>mapRow || col>mapCol) {objPlaced = true;}
+				else {
+					if(location.checkLocation(row,col)!=0) {objPlaced= true;}
+					else {objPlaced = false;}
+				}
 			}
 			potionLocation[placed][0]=row;
 			potionLocation[placed][1]=col;

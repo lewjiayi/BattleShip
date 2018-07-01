@@ -1,22 +1,27 @@
 import java.util.Random;
 
-public class Ship {
+public class Ship{
 	Rule rule = new Rule();
-	private int [][] shipLocation = new int[rule.getShipNum()][2];
-	private int [][] shipDestroyLocation = new int[rule.getShipNum()][2];
+	private int [][] shipLocation;
+	private int [][] shipDestroyLocation;
 	Random random = new Random();
 	Location location = new Location();
 	private int ship_destroy_count;
 	private int shipCount;
+	private int mapRow;
+	private int mapCol;
+	private int counter;
 	
-	public Ship() {
+	public Ship(int shipNum) {
+		shipLocation = new int[shipNum*rule.getShipLength()[1][0]][2];
+		shipDestroyLocation = new int[shipNum*rule.getShipLength()[1][0]][2];
 		ship_destroy_count = 0;
-		shipCount = rule.getShipNum();
-	}
-	
-	public void initShipLocation() {
-		int[] row = new int[rule.getShipLength()[0][1]];
-		int[] col = new int[rule.getShipLength()[0][1]];
+		counter = 0;
+		shipCount = shipNum;
+		mapRow = rule.getMapRow();
+		mapCol = rule.getMapCol();
+		int[] row = new int[rule.getShipLength()[1][0]];
+		int[] col = new int[rule.getShipLength()[1][0]];
 		int direction, length;
 		Boolean objPlaced;
 		
@@ -25,33 +30,37 @@ public class Ship {
 			length = randomLength();
 			objPlaced = true;
 			while(objPlaced) {
-				for (int i=0; i<length; i ++) {
+				for (int i=0; i<length;) {
 					switch (direction) {
 					case 0:
-						row[i] = random.nextInt(20)+i;
-						col[i] = random.nextInt(60);
+						row[i] = random.nextInt(mapRow-1)+i;
+						col[i] = random.nextInt(mapCol-1);
 					case 1:
-						row[i] = random.nextInt(20);
-						col[i] = random.nextInt(60)+i;
+						row[i] = random.nextInt(mapRow-1);
+						col[i] = random.nextInt(mapCol-1)+i;
 					}
-					if(location.checkLocation(row[i],col[i])!=0) {
-						objPlaced = true;
-						i = length;
-						}
-					else {objPlaced = false;}
-					if (row[i]>20 && col[i]>60) {
+					if (row[i]>mapRow || col[i]>mapCol) {
 						objPlaced= true;
 						i = length;
 					}
+					else{
+						if(location.checkLocation(row[i],col[i])!=0) {
+							objPlaced = true;
+							i = length;
+							}
+						else {objPlaced = false;}
+					}
+					i++;
 				}
 			}
 			for (int i=0; i<length; i ++) {
-				shipLocation[placed][0]=row[i];
-				shipLocation[placed][1]=col[i];
+				shipLocation[counter][0]=row[i];
+				shipLocation[counter][1]=col[i];
 				location.setShipLocation(row[i], col[i]);
+				counter++;
 			}
 		}
-	} // end Ship Initialization
+	}
 	
 	
 	public void setDestroyShip(int row, int col) {
@@ -63,8 +72,12 @@ public class Ship {
 	public int randomLength() {
 		int length, min, max;
 		min = rule.getShipLength()[0][0];
-		max = rule.getShipLength()[0][1];
+		max = rule.getShipLength()[1][0];
 		length = random.nextInt((max-min)+1) + min;
 		return length;
+	}
+	
+	public int getShipNum() {
+		return shipCount;
 	}
 }
