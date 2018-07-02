@@ -11,12 +11,15 @@ import java.util.Random;
  */
 
 public class Location{
-	Rule rule = new Rule();
-	private int [][] location = new int[rule.getMapRow()][rule.getMapCol()];
+	Rule rule;
+	private int [][] location;
 	private Boolean itemPlaced;
-	private int [][] shipLocation = new int[rule.getShipNum()][2];
+	private int [][] shipLocation;
 	
-	public Location() {
+	public Location(int level) {
+		rule = new Rule(level);
+		location = new int[rule.getMapRow()][rule.getMapCol()];
+		shipLocation = new int[rule.getShipNum()][2];
 		for (int[] row : location) {
 			Arrays.fill(row, 0);
 		}

@@ -1,9 +1,9 @@
 import java.util.Random;
 
 public class Trap {
-	Rule rule = new Rule();
+	Rule rule;
 	Random random = new Random();
-	Location location = new Location();
+	Location location;
 	private int trapCount;
 	private int trapHDCount;
 	private int trapLDCount;
@@ -16,17 +16,21 @@ public class Trap {
 	private int [][] trapTriggerredLocation;
 	
 
-	public Trap(int trapNum) {
+	public Trap(int level) {
+		rule = new Rule(level);
+		location = new Location(level);
 		trapTriggerCount = 0;
-		trapCount = trapNum;
+		trapCount = rule.getTrapNum();
 		trapHDCount = random.nextInt(trapCount);
 		trapLDCount = trapCount-trapHDCount;
 		mapRow = rule.getMapRow();
 		mapCol = rule.getMapCol();
-		trapLocation = new int[trapNum][2];
-		trapHighLocation = new int[trapNum][2];
-		trapLowLocation = new int[trapNum][2];
-		trapTriggerredLocation = new int[trapNum][2];
+		trapLocation = new int[trapCount][2];
+		trapHighLocation = new int[trapCount][2];
+		trapLowLocation = new int[trapCount][2];
+		trapTriggerredLocation = new int[trapCount][2];
+		
+		
 		int row = 0, col = 0;
 		Boolean objPlaced;
 		for(int placed=0 ; placed<trapCount  ; placed++){
@@ -34,11 +38,8 @@ public class Trap {
 			while(objPlaced) {
 				row = random.nextInt(mapRow-1);
 				col = random.nextInt(mapCol-1);
-				if (row>mapRow || col>mapCol) {objPlaced = true;}
-				else {
-					if(location.checkLocation(row,col)!=0) {objPlaced= true;}
-					else {objPlaced = false;}
-				}
+				if(location.checkLocation(row,col)!=0) {objPlaced= true;}
+				else {objPlaced = false;}
 			}
 			trapLocation[placed][0]=row;
 			trapLocation[placed][1]=col;
@@ -46,35 +47,16 @@ public class Trap {
 	}
 
 	public void setTrapMix() {
-		int hightrap, lowtrap = 0, row=0, col=0;
-		Boolean highTrapBol;
-	
-		for(int i=0; i<trapHDCount; i++) {
-			highTrapBol = true;
-			while(highTrapBol) {
-				hightrap = random.nextInt(trapCount);
-				row = trapLocation[hightrap][0];
-				col = trapLocation[hightrap][1];
-				for (int[] a : trapHighLocation) {
-					if(a[0]!=row && a[1]!=col) {highTrapBol = false;}
-				}
-			}
-			trapHighLocation[i][0]=row;
-			trapHighLocation[i][1]=col;
+		for (int i=0; i<trapHDCount;) {
+			trapHighLocation[i] = trapLocation[i];
+			i++;
 		}
 		
-	
-		for (int[] a : trapLocation) {
-			highTrapBol = true;
-			for (int[] b : trapHighLocation) {
-				if(a != b) {highTrapBol = false;}
-			}
-			if(!highTrapBol) {
-				trapLowLocation[lowtrap]=a;
-				lowtrap ++;
-			}
+		for (int i=0; i<trapLDCount;) {
+			trapLowLocation[i] = trapLocation[i+trapHDCount];
+			i++;
 		}
-	}//end set trap mixture
+	}
 	
 	
 	public void setTrapTriggered(int[]a) {

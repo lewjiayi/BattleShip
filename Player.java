@@ -6,10 +6,11 @@ public class Player {
 	private int ship_destroy_count;
 	private Boolean statusWin;
 	private Boolean statusLose;
-	Rule rule = new Rule();
+	Rule rule;
 	
 	
-	public Player() {
+	public Player(int level) {
+		rule = new Rule(level);
 		life_count = rule.getLifeNum();
 		step_count = 0;
 		ship_destroy_count = 0;

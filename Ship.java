@@ -1,23 +1,25 @@
 import java.util.Random;
 
 public class Ship{
-	Rule rule = new Rule();
+	private Rule rule;
 	private int [][] shipLocation;
 	private int [][] shipDestroyLocation;
-	Random random = new Random();
-	Location location = new Location();
+	private Random random = new Random();
+	private Location location;
 	private int ship_destroy_count;
 	private int shipCount;
 	private int mapRow;
 	private int mapCol;
 	private int counter;
 	
-	public Ship(int shipNum) {
-		shipLocation = new int[shipNum*rule.getShipLength()[1][0]][2];
-		shipDestroyLocation = new int[shipNum*rule.getShipLength()[1][0]][2];
+	public Ship(int level) {
+		rule = new Rule(level);
+		location = new Location(level);
+		shipCount = rule.getShipNum();
+		shipLocation = new int[shipCount*rule.getShipLength()[1][0]][2];
+		shipDestroyLocation = new int[shipCount*rule.getShipLength()[1][0]][2];
 		ship_destroy_count = 0;
 		counter = 0;
-		shipCount = shipNum;
 		mapRow = rule.getMapRow();
 		mapCol = rule.getMapCol();
 		int[] row = new int[rule.getShipLength()[1][0]];
@@ -39,7 +41,7 @@ public class Ship{
 						row[i] = random.nextInt(mapRow-1);
 						col[i] = random.nextInt(mapCol-1)+i;
 					}
-					if (row[i]>mapRow || col[i]>mapCol) {
+					if (row[i]>=mapRow || col[i]>=mapCol) {
 						objPlaced= true;
 						i = length;
 					}

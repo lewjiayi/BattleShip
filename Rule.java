@@ -11,8 +11,7 @@ public class Rule {
 	private final int[] advance = {20, 30, 18};
 	private final int[][] shipLength = {{3},{5}};
 
-	
-	public void setLevel(int a) {
+	public Rule(int a) {
 		switch (a){
 		case 1:
 			ship_num = beginner[0];
@@ -30,6 +29,7 @@ public class Rule {
 			pot_num = advance[2];
 		}
 	}
+	
 	
 	public int getShipNum() {
 		return ship_num;

@@ -2,8 +2,8 @@ import java.util.Random;
 
 public class Potion {
 	Random random = new Random();
-	Location location = new Location();
-	Rule rule = new Rule();
+	Location location;
+	Rule rule;
 	private int potionCount;
 	private int potionLSCount;
 	private int potionTRCount;
@@ -18,19 +18,23 @@ public class Potion {
 	private int[][] potionTriggerLocation;
 
 	
-	public Potion(int potionNum) {
-		potionCount = potionNum;
+	public Potion(int level) {
+		rule = new Rule(level);
+		location = new Location(level);
+		potionCount = rule.getPotNum();
 		potionTriggerCount = 0;
 		mapRow = rule.getMapRow();
 		mapCol = rule.getMapCol();
+		potionLocation = new int[potionCount][2];
+		potionLSLocation = new int[potionCount][2];
+		potionTRLocation = new int[potionCount][2];
+		potionSRLocation = new int[potionCount][2];
+		potionTriggerLocation = new int[potionCount][2];
 		potionTRCount = random.nextInt(potionCount)+1;
 		potionLSCount = random.nextInt(potionCount-potionTRCount)+1;
 		potionSRCount = potionCount - potionLSCount - potionTRCount;
-		potionLocation = new int[potionNum][2];
-		potionLSLocation = new int[potionNum][2];
-		potionTRLocation = new int[potionNum][2];
-		potionSRLocation = new int[potionNum][2];
-		potionTriggerLocation = new int[potionNum][2];
+		
+		
 		int row = 0, col = 0;
 		Boolean objPlaced;
 		for(int placed=0 ; placed<potionCount  ; placed++){
@@ -38,11 +42,8 @@ public class Potion {
 			while(objPlaced) {
 				row = random.nextInt(mapRow-1);
 				col = random.nextInt(mapCol-1);
-				if (row>mapRow || col>mapCol) {objPlaced = true;}
-				else {
-					if(location.checkLocation(row,col)!=0) {objPlaced= true;}
-					else {objPlaced = false;}
-				}
+				if(location.checkLocation(row,col)!=0) {objPlaced= true;}
+				else {objPlaced = false;}
 			}
 			potionLocation[placed][0]=row;
 			potionLocation[placed][1]=col;
@@ -51,61 +52,22 @@ public class Potion {
 	
 	
 	public void setPotionMix() {
-		int LSPot, TRPot, SRPot = 0, row=0, col=0;
-		Boolean LSPotBol, TRPotBol;
-		
-		for(int i=0; i<potionTRCount; i++) {
-			TRPotBol = true;
-			while(TRPotBol) {
-				TRPot = random.nextInt(potionCount);
-				row = potionLocation[TRPot][0];
-				col = potionLocation[TRPot][1];
-				for (int[] a : potionTRLocation) {
-					if(a[0]!=row && a[1]!=col) {TRPotBol = false;}
-				}
-			}
-			potionTRLocation[i][0]=row;
-			potionTRLocation[i][1]=col;
+		for (int i=0; i<potionLSCount;) {
+			potionLSLocation[i] = potionLocation[i];
+			i++;
 		}
 		
-		for(int i=0; i<potionLSCount; i++) {
-			LSPotBol = true;
-			TRPotBol = true;
-			while(LSPotBol) {
-				LSPot = random.nextInt(potionCount);
-				row = potionLocation[LSPot][0];
-				col = potionLocation[LSPot][1];
-				for (int[] a : potionTRLocation) {
-					if(a[0]!=row && a[1]!=col) {TRPotBol = false;}
-				}
-				if(!TRPotBol) {
-					for (int[] a : potionLSLocation) {
-						if(a[0]!=row && a[1]!=col) {LSPotBol = false;}
-					}
-				}
-			}
-			potionLSLocation[i][0]=row;
-			potionLSLocation[i][1]=col;
+		for (int i=0; i<potionTRCount;) {
+			potionTRLocation[i] = potionLocation[i+potionLSCount];
+			i++;
 		}
 		
-		for (int[] a : potionLocation) {
-			TRPotBol = true;
-			LSPotBol = true;
-			for (int[] b : potionTRLocation) {
-				if(a != b) {TRPotBol = false;}
-			}
-			if(!TRPotBol) {
-				for (int[] b : potionLSLocation) {
-					if(a != b) {LSPotBol = false;}
-				}
-			}
-			if(!LSPotBol) {
-				potionSRLocation[SRPot]=a;
-				SRPot ++;
-			}
+		for (int i=0; i<potionSRCount;) {
+			potionSRLocation[i] = potionLocation[i+potionTRCount+potionLSCount];
+			i++;
 		}
 		
-	}// end set potion mixture
+	}
 	
 	
 	public void setPotionTriggered(int[]a) {

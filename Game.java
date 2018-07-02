@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Game {
 	
-	private int level, shipNum, trapNum, potionNum;
+	private int level;
 	private Display screen;
 	private Message message;
 	private Player player;
@@ -13,14 +13,13 @@ public class Game {
 	private Ship ship;
 	private Trap trap;
 	private Potion potion;
+
 	
 	public Game() {
 		screen = new Display();
 		message = new Message();		
 		input = new Input();
-		map = new Map();
-		rule = new Rule();
-		player = new Player();
+		
 		
 	}
 	
@@ -30,6 +29,7 @@ public class Game {
 		screen.displayMessage(message.getMsgWelcome());
 		selectLevel();
 		construct();
+		screen.displayMessage(message.getMsgWelcome());
 	}
 	
 	
@@ -39,16 +39,15 @@ public class Game {
 		screen.displayMessage(message.getMsgLevel2());
 		screen.displayMessage(message.getMsgLevel3());
 		level = input.inputInt();
-		rule.setLevel(level);
-		shipNum = rule.getShipNum();
-		trapNum = rule.getTrapNum();
-		potionNum = rule.getPotNum();
+		rule = new Rule(level);
 	}
 	
 	public void construct() {
-		ship = new Ship(shipNum);
-		trap = new Trap (trapNum);
-		potion = new Potion(potionNum);
+		ship = new Ship(level);
+		trap = new Trap (level);
+		potion = new Potion(level);
+		map = new Map(level);
+		player = new Player(level);
 	
 	}
 	

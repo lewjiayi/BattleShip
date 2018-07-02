@@ -14,10 +14,12 @@ import java.util.Arrays;
  */
 
 public class Map {
-	Rule rule = new Rule();
-	private String [][] map = new String [rule.getMapRow()][rule.getMapCol()];
+	Rule rule;
+	private String [][] map;
 	
-	public Map() {
+	public Map(int level) {
+		rule = new Rule(level);
+		map = new String [rule.getMapRow()][rule.getMapCol()];
 		for (String[]row : map) {
 			Arrays.fill(row, "#");
 		}
