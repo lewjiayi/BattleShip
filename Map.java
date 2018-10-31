@@ -8,9 +8,6 @@ import java.util.Arrays;
  * Reveal HD Trap	- 4 "-" (Not Triggered)
  * RevealLD Trap	- 5 "=" (Not Triggered)
  * Triggered Potion	- 6 "@"
- * 
- * 
- * 
  */
 
 public class Map {
