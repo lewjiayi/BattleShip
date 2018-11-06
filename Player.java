@@ -1,53 +1,40 @@
 
 public class Player {
 	private String name;
-	private int life_count;
-	private int step_count;
-	private int ship_destroy_count;
-	private Boolean statusWin;
-	private Boolean statusLose;
-	Rule rule;
+	private int lifeCount;
+	private int stepCount;
+	private Rule rule;
 	
 	
 	public Player(int level) {
 		rule = new Rule(level);
-		life_count = rule.getLifeNum();
-		step_count = 0;
-		ship_destroy_count = 0;
-		statusWin = false;
-		statusLose = false;
+		lifeCount = rule.getLifeNum();
+		stepCount = 0;
 	}
 	
 	public void addOneStep() {
-		step_count++;
+		stepCount++;
 	}
 	
 	public void lossTwoLife() {
-		life_count = life_count - 2;
+		lifeCount = lifeCount - 2;
 	}
 	
 	public void lossOneLife() {
-		life_count--;
+		lifeCount--;
 	}
 	
 	public void addOneLife() {
-		life_count++;
+		lifeCount++;
 	}
 	
-	public void destroyOneShip() {
-		ship_destroy_count++;
-	}
 	
 	public int getLifeCount() {
-		return life_count;
+		return lifeCount;
 	}
 	
 	public int getStepCount() {
-		return step_count;
-	}
-	
-	public int getShipDestroyCount() {
-		return ship_destroy_count;
+		return stepCount;
 	}
 	
 	public void setName(String a) {
@@ -57,23 +44,6 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	
-	public Boolean getStatusWin() {
-		return statusWin;
-	}
-	
-	public Boolean getStatusLose() {
-		return statusLose;
-	}
-	
-	public void setStatusWin() {
-		statusWin = true;
-	}
-	
-	public void setStatusLose() {
-		statusLose = true;
-	}
-	
 	
 	
 

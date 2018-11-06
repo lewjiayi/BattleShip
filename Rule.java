@@ -17,16 +17,18 @@ public class Rule {
 			ship_num = beginner[0];
 			trap_num = beginner[1];
 			pot_num = beginner[2];
+			break;
 			
 		case 2:
 			ship_num = intermediate[0];
 			trap_num = intermediate[1];
 			pot_num = intermediate[2];
-			
+			break;
 		case 3:
 			ship_num = advance[0];
 			trap_num = advance[1];
 			pot_num = advance[2];
+			break;
 		}
 	}
 	
